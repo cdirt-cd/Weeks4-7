@@ -7,12 +7,24 @@ public class FlipMover : MonoBehaviour
 {
     private float direction = 1f;
     private float speed = 1f;
+
     private bool buttonClicked = false;
+
     private Camera  gameCamera;
+
+    public AudioSource moveClickAudioSource;
+    public AudioSource flipClickAudioSource;
+    public AudioSource stopClickAudioSource;
+
+    public AudioClip stopClickAudioClip;
+
+    public List<AudioClip> flipClickAudioClips;
+
+
 
     void Start()
     {
-        
+        stopClickAudioSource.clip = stopClickAudioClip;
     }
 
     // Update is called once per frame
@@ -36,15 +48,27 @@ public class FlipMover : MonoBehaviour
 
     public void OnMoveClick()
     {
+
         buttonClicked = true;
-                               
+        moveClickAudioSource.Play();                       
     }
 
 
-    public void OnStopClick() { buttonClicked = false; }
+    public void OnStopClick() 
+    {
+        buttonClicked = false; 
+        stopClickAudioSource.Play();
+    }
 
     public void OnFlipClick()
     {
         direction *= -1f;
+        //flipClickAudioSource.Play();
+        //make sure you are taking into account the exclusive nature of the maximum parameter with random.range
+        int randomIndex = UnityEngine.Random.Range(0, flipClickAudioClips.Count);
+        AudioClip randomlyChosenClip = flipClickAudioClips[randomIndex];
+
+        flipClickAudioSource.PlayOneShot(randomlyChosenClip);
+
     }
 }
