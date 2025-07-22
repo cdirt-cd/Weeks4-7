@@ -2,11 +2,16 @@ using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class FlipMover : MonoBehaviour
 {
     private float direction = 1f;
-    private float speed = 1f;
+    private float speed = 2f;
+    public float maxStamina = 100;
+    public float minHealth;
+    private float currentStamina;
+    public float exhaustion;
 
     private bool buttonClicked = false;
 
@@ -20,11 +25,26 @@ public class FlipMover : MonoBehaviour
 
     public List<AudioClip> flipClickAudioClips;
 
+    public Slider staminaBarSlider;
+
+    public Image staminaBarImage;
+
+    
+
+   
+
 
 
     void Start()
     {
         stopClickAudioSource.clip = stopClickAudioClip;
+
+       
+
+        currentStamina = maxStamina;
+
+        staminaBarSlider.value = currentStamina / maxStamina;
+
     }
 
     // Update is called once per frame
@@ -43,6 +63,17 @@ public class FlipMover : MonoBehaviour
 
 
             transform.position = pos;
+
+            
+        }
+
+        if(buttonClicked == true)
+        {
+            currentStamina = currentStamina - 5f * Time.deltaTime;
+
+            staminaBarSlider.value = currentStamina / maxStamina;
+
+
         }
     }
 
@@ -71,4 +102,15 @@ public class FlipMover : MonoBehaviour
         flipClickAudioSource.PlayOneShot(randomlyChosenClip);
 
     }
+
+    public void StaminaGoingDown()
+    {
+        if (staminaBarSlider.value == 0)
+        {
+            speed = speed / 2;
+
+            //stamineBarImage.color = Color.red;
+        }
+    }
+
 }
