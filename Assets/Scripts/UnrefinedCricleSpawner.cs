@@ -4,13 +4,15 @@ using UnityEngine;
 
 public class UnrefinedCricleSpawner : MonoBehaviour
 {
-    private GameObject unrefinedCircle;
+    public GameObject unrefinedCircle;
 
 
 
     void Start()
     {
         GetComponent<GameObject>();
+
+        Instantiate(unrefinedCircle, transform.position, Quaternion.identity);
     }
 
     // Update is called once per frame
