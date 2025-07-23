@@ -7,7 +7,7 @@ public class UnrefinedCricleSpawner : MonoBehaviour
     //GameObject class so the script knows what to instantiate
     public GameObject unrefinedCircle;
 
-    private List<GameObject> unrefinedCircles = new List<GameObject>();
+    public List<GameObject> unrefinedCircles = new List<GameObject>();
 
 
     void Start()
@@ -16,8 +16,8 @@ public class UnrefinedCricleSpawner : MonoBehaviour
         //Instantiate(unrefinedCircle, transform.position, Quaternion.identity);
 
         
-        GameObject spawnedUnrefinedCircle = Instantiate(unrefinedCircle, transform.position, Quaternion.identity);
-        unrefinedCircles.Add(spawnedUnrefinedCircle);
+        GameObject spawnedUnrefinedCircles = Instantiate(unrefinedCircle, transform.position, Quaternion.identity);
+        unrefinedCircles.Add(spawnedUnrefinedCircles);
 
         
 
@@ -28,6 +28,11 @@ public class UnrefinedCricleSpawner : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+      if(unrefinedCircle == null)
+        {
+            GameObject spawnedUnrefinedCircles = Instantiate(unrefinedCircle, transform.position, Quaternion.identity);
+            unrefinedCircles.Add(spawnedUnrefinedCircles);
+        }
+
     }
 }

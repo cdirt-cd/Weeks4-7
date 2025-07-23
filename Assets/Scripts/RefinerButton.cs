@@ -7,13 +7,16 @@ public class RefinerButton : MonoBehaviour
 {
     private bool buttonClicked = false;
     public GameObject unrefinedCircle;
-    List<GameObject> unrefinedCircles = new List<GameObject>();
+    public List<GameObject> unrefinedCircles = new List<GameObject>();
 
     // Start is called before the first frame update
     void Start()
     {
-        //GameObject spawnedUnrefinedCircle = Instantiate(unrefinedCircle);
-        //unrefinedCircles.Add(spawnedUnrefinedCircle);
+
+        //GameObject spawnedUnrefinedCircles = Instantiate(unrefinedCircle);
+        //unrefinedCircles.Add(spawnedUnrefinedCircles);
+
+        //GetComponent<UnrefinedCricleSpawner>().unrefinedCircles;
     }
 
     // Update is called once per frame
@@ -21,7 +24,7 @@ public class RefinerButton : MonoBehaviour
     {
        if(buttonClicked == true)
         {
-            Destroy(unrefinedCircle);
+            //Destroy(spawnedUnrefinedCircles);
         }
     }
 
