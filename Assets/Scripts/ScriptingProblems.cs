@@ -41,12 +41,16 @@ public class ScriptingProblems : MonoBehaviour
 		int highestNumber = 0;
 		for (int i = 0; i < numbers.Count; i++)
 		{
-			if (i > highestNumber)
+			if (numbers[i] > highestNumber)
 			{
 				highestNumber = i;
 			}
+
+			Debug.Log(highestNumber);
 		}
 		resultText.text = "Highest number["+highestNumber.ToString()+"]";
+
+
 	}
 
 	class Person
