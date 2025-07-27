@@ -43,7 +43,7 @@ public class ScriptingProblems : MonoBehaviour
 		{
 			if (numbers[i] > highestNumber)
 			{
-				highestNumber = i;
+				highestNumber = numbers[i];
 			}
 
 			Debug.Log(highestNumber);

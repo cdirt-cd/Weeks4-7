@@ -5,7 +5,9 @@ using UnityEngine;
 public class UnrefinedCricleSpawner : MonoBehaviour
 {
     //GameObject class so the script knows what to instantiate
-    public GameObject unrefinedCircle;
+    public GameObject prefabUnrefinedCircle;
+
+    private GameObject spawnedUnrefinedCircle;
 
     public List<GameObject> unrefinedCircles = new List<GameObject>();
 
@@ -15,11 +17,8 @@ public class UnrefinedCricleSpawner : MonoBehaviour
         //Instantiate the unrefinedCircle at the position of this GameObject on start
         //Instantiate(unrefinedCircle, transform.position, Quaternion.identity);
 
-        
-        GameObject spawnedUnrefinedCircles = Instantiate(unrefinedCircle, transform.position, Quaternion.identity);
-        unrefinedCircles.Add(spawnedUnrefinedCircles);
 
-        
+        spawnedUnrefinedCircle = Instantiate(prefabUnrefinedCircle, transform.position, Quaternion.identity);
 
         //spawnedObjects { spawnedObject[0] }
 
@@ -28,11 +27,12 @@ public class UnrefinedCricleSpawner : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-      if(unrefinedCircle == null)
+        if (spawnedUnrefinedCircle == null)
         {
-            GameObject spawnedUnrefinedCircles = Instantiate(unrefinedCircle, transform.position, Quaternion.identity);
-            unrefinedCircles.Add(spawnedUnrefinedCircles);
+            spawnedUnrefinedCircle = Instantiate(prefabUnrefinedCircle, transform.position, Quaternion.identity);
+           
         }
+
 
     }
 }
