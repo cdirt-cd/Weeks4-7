@@ -131,16 +131,18 @@ public class UnrefinedCricleSpawner : MonoBehaviour
         //}
 
 
-        
+        //if the button isn't seen as pressed this code runs
         if (buttonPressed == false)
         {
+            //Vector3 stuff for Vector3.Distance shenanigans
             Vector3 spawnedUnrefinedCirclePos = spawnedUnrefinedCircle.transform.position;
             Vector3 damageAreaPos = damageArea.transform.position;
 
-
+            //if the unrefinedCircle is within the damageArea it runs the code below
             if (Vector3.Distance(spawnedUnrefinedCirclePos, damageAreaPos) <= damageDistance)//This checks where the unrefinedCircle is in relation to the refiner
                                                                               //then if it is within refiner it runs the code below
             {
+                //Destroys the unrefinedCircle and the player takes damage
                 Destroy(spawnedUnrefinedCircle);
                 currentHealth -= damage;
                 healthbarSlider.value = currentHealth / maxHealth;
@@ -150,9 +152,13 @@ public class UnrefinedCricleSpawner : MonoBehaviour
             //Debug.Log("Distance Between: " + Vector3.Distance(spawnedUnrefinedCirclePos, damageAreaPos));
         }
         
+        //code for game over screen
         if(currentHealth <= 0)
         {
+            //sets game over text to active
             gameOver.SetActive(true);
+
+           //freezes the game
            Time.timeScale = 0f;
 
         }
@@ -183,6 +189,7 @@ public class UnrefinedCricleSpawner : MonoBehaviour
 
             }
 
+            //bool variables, set to true when button pressed and then set to false after so that the button is seen as still pressed
             buttonPressed = true;
             buttonPressed = false;
         }
