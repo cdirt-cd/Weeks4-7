@@ -5,6 +5,8 @@ using UnityEngine.UI;
 
 public class RefinerButton : MonoBehaviour
 {
+
+    //Old code that was gonna be used for handling the destruction of unrefined circles when the button is clicked
     //public bool buttonClicked = false;
     //public float clickableRadius = 0.5f;
 

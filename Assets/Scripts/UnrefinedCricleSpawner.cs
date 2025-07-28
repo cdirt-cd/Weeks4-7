@@ -11,7 +11,11 @@ public class UnrefinedCricleSpawner : MonoBehaviour
 
     //public List<GameObject> unrefinedCircles = new List<GameObject>();
 
-    
+    public GameObject  prefabRefinedCircle;
+
+    private GameObject spawnedRefinedCircle;
+
+
 
     RefinerButton refinerButton;
 
@@ -31,7 +35,7 @@ public class UnrefinedCricleSpawner : MonoBehaviour
         refinerButton = FindObjectOfType<RefinerButton>();
 
         //spawnedObjects { spawnedObject[0] }
-
+        
     }
 
     // Update is called once per frame
@@ -40,7 +44,6 @@ public class UnrefinedCricleSpawner : MonoBehaviour
         Vector3 refinerPositionInScreenSpace = gameCamera.WorldToScreenPoint(refinerButton.transform.position);
 
 
-        
 
         if (spawnedUnrefinedCircle == null)
         {
@@ -99,11 +102,12 @@ public class UnrefinedCricleSpawner : MonoBehaviour
 
                 Destroy(spawnedUnrefinedCircle);
 
+                spawnedRefinedCircle = Instantiate(prefabRefinedCircle, refinerButton.transform.position, Quaternion.identity);
 
             }
 
 
-           
+
         }
     }
 
