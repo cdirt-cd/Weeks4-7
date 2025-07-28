@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -45,6 +46,9 @@ public class UnrefinedCricleSpawner : MonoBehaviour
 
     private bool buttonPressed = false;
 
+    public GameObject gameOver;
+
+
 
     void Start()
     {
@@ -69,11 +73,15 @@ public class UnrefinedCricleSpawner : MonoBehaviour
 
         //spawnedObjects { spawnedObject[0] }
 
+
+        gameOver.SetActive(false);
     }
 
     // Update is called once per frame
     void Update()
     {
+
+      
         //screenspace stuff for transform things
         Vector3 refinerPositionInScreenSpace = gameCamera.WorldToScreenPoint(refinerButton.transform.position);
         Vector3 refinedCircleSpawnPositionInScreenSpace = gameCamera.WorldToScreenPoint(refinedCircleSpawnLocation.transform.position);
@@ -139,9 +147,16 @@ public class UnrefinedCricleSpawner : MonoBehaviour
 
             }
 
-            Debug.Log("Distance Between: " + Vector3.Distance(spawnedUnrefinedCirclePos, damageAreaPos));
+            //Debug.Log("Distance Between: " + Vector3.Distance(spawnedUnrefinedCirclePos, damageAreaPos));
         }
+        
+        if(currentHealth <= 0)
+        {
+            gameOver.SetActive(true);
+           Time.timeScale = 0f;
 
+        }
+     
 
     }
 
@@ -169,7 +184,7 @@ public class UnrefinedCricleSpawner : MonoBehaviour
             }
 
             buttonPressed = true;
-
+            buttonPressed = false;
         }
     }
     public void OnHealthChanged() //debugging code to see if the health bar is working
