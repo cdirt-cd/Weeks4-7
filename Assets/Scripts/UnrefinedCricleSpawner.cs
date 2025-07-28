@@ -39,6 +39,12 @@ public class UnrefinedCricleSpawner : MonoBehaviour
     //camera class for converting world coordinates to screen coordinates
     private Camera gameCamera;
 
+    DamageArea damageArea;
+
+    private float damageDistance = 1f;
+
+    private bool buttonPressed = false;
+
 
     void Start()
     {
@@ -55,6 +61,8 @@ public class UnrefinedCricleSpawner : MonoBehaviour
 
         refinedCircleSpawnLocation = FindObjectOfType<RefinedCircleSpawnLocation>();
 
+        damageArea = FindObjectOfType<DamageArea>();
+
         //code for the script to know what the inital health is
         currentHealth = maxHealth;
         healthbarSlider.value = currentHealth / maxHealth;
@@ -70,7 +78,7 @@ public class UnrefinedCricleSpawner : MonoBehaviour
         Vector3 refinerPositionInScreenSpace = gameCamera.WorldToScreenPoint(refinerButton.transform.position);
         Vector3 refinedCircleSpawnPositionInScreenSpace = gameCamera.WorldToScreenPoint(refinedCircleSpawnLocation.transform.position);
 
-
+        //Vector3 damageArea = new Vector3(-2.71f, -1.32f, 0.05537571f);
 
         if (spawnedUnrefinedCircle == null)//this checks to see if there is a unrefinedCircle, of there isn't it runs the code below
         {
@@ -114,30 +122,26 @@ public class UnrefinedCricleSpawner : MonoBehaviour
         //    Debug.Log("destroyDistance: " + destroyDistance);
         //}
 
-        //code for refining the unrefined circle when the refiner button is clicked and the unrefined circle is within the refiner
-        if (refinerButton != null) //this checks if the refiner button has been pressed and runs the code below
+
+        
+        if (buttonPressed == false)
         {
-            //this code is for setting up Vector3.Distance stuff
             Vector3 spawnedUnrefinedCirclePos = spawnedUnrefinedCircle.transform.position;
-            Vector3 refinerPos = refinerButton.transform.position;
-
-            //old variable that I scrapped due to being obsolete
-            //float distanceBetween = Vector3.Distance(spawnedUnrefinedCirclePos, refinerPos);
+            Vector3 damageAreaPos = damageArea.transform.position;
 
 
-            if (Vector3.Distance(spawnedUnrefinedCirclePos, refinerPos) <= clickableRadius)//This checks where the unrefinedCircle is in relation to the refiner
-                //then if it is within refiner it runs the code below
+            if (Vector3.Distance(spawnedUnrefinedCirclePos, damageAreaPos) <= damageDistance)//This checks where the unrefinedCircle is in relation to the refiner
+                                                                              //then if it is within refiner it runs the code below
             {
-                //this destroys the UnrefinedCircle
                 Destroy(spawnedUnrefinedCircle);
-                //this spawns in a refinedCircle
-                spawnedRefinedCircle = Instantiate(prefabRefinedCircle, refinedCircleSpawnLocation.transform.position, Quaternion.identity);
+                currentHealth -= damage;
+                healthbarSlider.value = currentHealth / maxHealth;
 
             }
 
-
-
+            Debug.Log("Distance Between: " + Vector3.Distance(spawnedUnrefinedCirclePos, damageAreaPos));
         }
+
 
     }
 
@@ -164,7 +168,7 @@ public class UnrefinedCricleSpawner : MonoBehaviour
 
             }
 
-
+            buttonPressed = true;
 
         }
     }
@@ -173,10 +177,5 @@ public class UnrefinedCricleSpawner : MonoBehaviour
         Debug.Log("Health has changed" + healthbarSlider.value.ToString());
     }
 
-    public void OnDamageClick()  //debugging code to see if the health bar is working
-    {
 
-        currentHealth -= damage;
-        healthbarSlider.value = currentHealth / maxHealth;
-    }
 }

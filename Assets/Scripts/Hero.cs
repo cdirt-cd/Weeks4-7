@@ -26,12 +26,12 @@ public class Hero : MonoBehaviour
         
     }
 
-    //public void OnDamageClick()
-    //{
+    public void OnDamageClick()
+    {
 
-    //    currentHealth -= damage;
-    //    healthbarSlider.value = currentHealth / maxHealth;
-    //}
+        currentHealth -= damage;
+        healthbarSlider.value = currentHealth / maxHealth;
+    }
 
     public void OnHealthChanged()
     {
