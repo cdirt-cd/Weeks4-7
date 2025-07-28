@@ -19,6 +19,8 @@ public class UnrefinedCricleSpawner : MonoBehaviour
 
     RefinerButton refinerButton;
 
+    RefinedCircleSpawnLocation refinedCircleSpawnLocation;
+
     private float clickableRadius = 1f;
 
 
@@ -33,15 +35,18 @@ public class UnrefinedCricleSpawner : MonoBehaviour
         gameCamera = Camera.main;
         spawnedUnrefinedCircle = Instantiate(prefabUnrefinedCircle, transform.position, Quaternion.identity);
         refinerButton = FindObjectOfType<RefinerButton>();
+        refinedCircleSpawnLocation = FindObjectOfType<RefinedCircleSpawnLocation>();
+
 
         //spawnedObjects { spawnedObject[0] }
-        
+
     }
 
     // Update is called once per frame
     void Update()
     {
         Vector3 refinerPositionInScreenSpace = gameCamera.WorldToScreenPoint(refinerButton.transform.position);
+        Vector3 refinedCircleSpawnPositionInScreenSpace = gameCamera.WorldToScreenPoint(refinedCircleSpawnLocation.transform.position);
 
 
 
@@ -51,6 +56,7 @@ public class UnrefinedCricleSpawner : MonoBehaviour
            
         }
 
+        //Old code that was gonna be used for handling the destruction of unrefined circles 
         //if (refinerButton != null)
         //{
         //    Vector3 spawnedUnrefinedCirclePos = spawnedUnrefinedCircle.transform.position;
@@ -64,7 +70,7 @@ public class UnrefinedCricleSpawner : MonoBehaviour
 
         //        destroyDistance = true;
 
-               
+
 
         //    }
 
@@ -89,6 +95,8 @@ public class UnrefinedCricleSpawner : MonoBehaviour
 
     public void OnClick()
     {
+        //When a button is clicked this code runs
+        //To make sure that this code only runs
         if (refinerButton != null)
         {
             Vector3 spawnedUnrefinedCirclePos = spawnedUnrefinedCircle.transform.position;
@@ -102,7 +110,7 @@ public class UnrefinedCricleSpawner : MonoBehaviour
 
                 Destroy(spawnedUnrefinedCircle);
 
-                spawnedRefinedCircle = Instantiate(prefabRefinedCircle, refinerButton.transform.position, Quaternion.identity);
+                spawnedRefinedCircle = Instantiate(prefabRefinedCircle, refinedCircleSpawnLocation.transform.position, Quaternion.identity);
 
             }
 
