@@ -12,7 +12,7 @@ public class CrusherScript : MonoBehaviour
 
     private bool crusherActive = false;
     // private bool defaultPosition = true;
-    private float beginning = 2.7612f;
+    //private float beginning = 2.7612f;
     private float end = 0.86f;
 
     private Camera gameCamera;
@@ -35,8 +35,11 @@ public class CrusherScript : MonoBehaviour
         Vector3 target = new Vector3(2.91f, 0.85f, 0f);
         Vector3 directionToMove = target - start;
 
-        Vector3 crusherPositionInScreenSpace = gameCamera.WorldToScreenPoint(transform.position);
-        transform.position = transform.position + directionToMove * speed * Time.deltaTime;
+        if (crusherActive == true)
+        {
+            Vector3 crusherPositionInScreenSpace = gameCamera.WorldToScreenPoint(transform.position);
+            transform.position = transform.position + directionToMove * speed * Time.deltaTime;
+        }
         
             
         if (transform.position.y <= end)

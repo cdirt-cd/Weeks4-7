@@ -162,7 +162,9 @@ public class UnrefinedCricleSpawner : MonoBehaviour
            Time.timeScale = 0f;
 
         }
-     
+
+
+
 
     }
 
@@ -188,9 +190,10 @@ public class UnrefinedCricleSpawner : MonoBehaviour
                 spawnedRefinedCircle = Instantiate(prefabRefinedCircle, refinedCircleSpawnLocation.transform.position, Quaternion.identity);
 
             }
+            
 
-            //bool variables, set to true when button pressed and then set to false after so that the button is seen as still pressed
-            buttonPressed = true;
+                //bool variables, set to true when button pressed and then set to false after so that the button is seen as still pressed
+                buttonPressed = true;
             buttonPressed = false;
         }
     }
