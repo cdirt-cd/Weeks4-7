@@ -1,9 +1,17 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class UnrefinedCricleSpawner : MonoBehaviour
 {
+    public Slider healthbarSlider;
+
+    public float maxHealth = 100;
+    public float minHealth;
+    private float currentHealth;
+    private float damage = 10f;
+
     //GameObject class so the script knows what to instantiate
     public GameObject prefabUnrefinedCircle;
 
@@ -37,6 +45,9 @@ public class UnrefinedCricleSpawner : MonoBehaviour
         refinerButton = FindObjectOfType<RefinerButton>();
         refinedCircleSpawnLocation = FindObjectOfType<RefinedCircleSpawnLocation>();
 
+        currentHealth = maxHealth;
+
+        healthbarSlider.value = currentHealth / maxHealth;
 
         //spawnedObjects { spawnedObject[0] }
 
@@ -91,6 +102,28 @@ public class UnrefinedCricleSpawner : MonoBehaviour
         //    Debug.Log("destroyDistance: " + destroyDistance);
         //}
 
+
+        if (refinerButton != null)
+        {
+            Vector3 spawnedUnrefinedCirclePos = spawnedUnrefinedCircle.transform.position;
+            Vector3 refinerPos = refinerButton.transform.position;
+
+
+            //float distanceBetween = Vector3.Distance(spawnedUnrefinedCirclePos, refinerPos);
+
+            if (Vector3.Distance(spawnedUnrefinedCirclePos, refinerPos) <= clickableRadius)
+            {
+
+                Destroy(spawnedUnrefinedCircle);
+
+                spawnedRefinedCircle = Instantiate(prefabRefinedCircle, refinedCircleSpawnLocation.transform.position, Quaternion.identity);
+
+            }
+
+
+
+        }
+
     }
 
     public void OnClick()
@@ -118,5 +151,15 @@ public class UnrefinedCricleSpawner : MonoBehaviour
 
         }
     }
+    public void OnHealthChanged()
+    {
+        Debug.Log("Health has changed" + healthbarSlider.value.ToString());
+    }
 
+    public void OnDamageClick()
+    {
+
+        currentHealth -= damage;
+        healthbarSlider.value = currentHealth / maxHealth;
+    }
 }

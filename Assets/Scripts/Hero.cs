@@ -10,7 +10,7 @@ public class Hero : MonoBehaviour
     public float maxHealth = 100;
     public float minHealth;
     private float currentHealth;
-    public float damage;
+    private float damage = 10f;
 
 
     void Start()
@@ -26,12 +26,12 @@ public class Hero : MonoBehaviour
         
     }
 
-    public void OnDamageClick()
-    {
+    //public void OnDamageClick()
+    //{
 
-        currentHealth -= damage;
-        healthbarSlider.value = currentHealth / maxHealth;
-    }
+    //    currentHealth -= damage;
+    //    healthbarSlider.value = currentHealth / maxHealth;
+    //}
 
     public void OnHealthChanged()
     {
